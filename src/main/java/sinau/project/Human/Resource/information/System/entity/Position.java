@@ -15,4 +15,10 @@ public class Position extends BaseEntity<Position>{
 
     private static final long serialVersionUID = 1516686760606961961L;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "note", columnDefinition = "TEXT")
+    private String note;
+
 }

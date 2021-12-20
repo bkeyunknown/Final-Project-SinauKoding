@@ -15,4 +15,7 @@ public class Bank extends BaseEntity<Bank>{
 
     private static final long serialVersionUID = 6460783416031543243L;
 
+    @Column(name = "code", columnDefinition = "VARCHAR(10)")
+    private String code;
+
 }
