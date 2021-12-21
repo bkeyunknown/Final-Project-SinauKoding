@@ -32,6 +32,9 @@ public class User extends BaseEntity<User> {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "token")
+    private String token;
+
     @Column(name = "no_rekening")
     private String noRekening;
 
