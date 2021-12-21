@@ -36,7 +36,7 @@ public class User extends BaseEntity<User> {
     private String noRekening;
 
     @Column(name = "active")
-    private int active;
+    private Boolean active = Boolean.TRUE;
 
     @Column(name = "date_of_birth")
     @Temporal(DATE)

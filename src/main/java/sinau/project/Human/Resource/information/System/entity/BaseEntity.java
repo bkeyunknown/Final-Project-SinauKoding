@@ -51,7 +51,7 @@ public abstract class BaseEntity<T> implements Serializable {
     }
 
     @PreRemove
-    protected void onDeleted() {
+    protected void onRemove() {
         setDeleted(Boolean.TRUE);
         setDeletedTime(new Date());
     }
