@@ -18,4 +18,7 @@ public class Bank extends BaseEntity<Bank>{
     @Column(name = "code", columnDefinition = "VARCHAR(10)")
     private String code;
 
+    @Column(name = "name", columnDefinition = "VARCHAR(40)")
+    private String name;
+
 }

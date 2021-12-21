@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import java.util.Date;
 
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.TemporalType.*;
 
 @Entity
@@ -44,5 +45,9 @@ public class Attendance extends BaseEntity<Attendance>{
     @Column(name = "rest_end_time")
     @Temporal(TIME)
     private Date restEndTime;
+
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
 }

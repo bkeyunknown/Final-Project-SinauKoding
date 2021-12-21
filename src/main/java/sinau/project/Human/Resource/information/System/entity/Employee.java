@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.TemporalType.DATE;
 
 @Entity
@@ -38,5 +39,9 @@ public class Employee extends BaseEntity<Employee>{
     @Column(name = "status")
     @Enumerated(STRING)
     private StatusEmployee status = StatusEmployee.ACTIVE;
+
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

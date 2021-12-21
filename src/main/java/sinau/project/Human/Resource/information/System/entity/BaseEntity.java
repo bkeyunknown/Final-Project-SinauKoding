@@ -25,9 +25,16 @@ public abstract class BaseEntity<T> implements Serializable {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(name = "created_time")
+    @Column(name = "created_time", updatable = false)
     @Temporal(TIMESTAMP)
     private Date createTime;
+
+    @Column(name = "deleted")
+    private boolean deleted = Boolean.FALSE;
+
+    @Column(name = "deleted_time")
+    @Temporal(TIMESTAMP)
+    private Date deletedTime;
 
     @Column(name = "updated_time")
     @Temporal(TIMESTAMP)
@@ -42,4 +49,11 @@ public abstract class BaseEntity<T> implements Serializable {
     protected void onUpdate() {
         setUpdatedTime(new Date());
     }
+
+    @PreRemove
+    protected void onDeleted() {
+        setDeleted(Boolean.TRUE);
+        setDeletedTime(new Date());
+    }
+
 }

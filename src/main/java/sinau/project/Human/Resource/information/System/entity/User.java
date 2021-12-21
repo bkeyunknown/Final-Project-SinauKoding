@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.TemporalType.*;
 
 @Entity
@@ -86,5 +87,21 @@ public class User extends BaseEntity<User> {
     @Column(name = "role", columnDefinition = "VARCHAR(50)")
     @Enumerated(STRING)
     private Role role = Role.ROLE_USER;
+
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "bank_id")
+    private Bank bank;
+
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "position_id")
+    private Position position;
+
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "division_id")
+    private Division division;
 
 }
