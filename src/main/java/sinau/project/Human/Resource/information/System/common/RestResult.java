@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RestResult implements Serializable {
 
@@ -20,4 +20,23 @@ public class RestResult implements Serializable {
 
     private String status = StatusCode.OPERATION_SUCCESS;
 
+    public RestResult(Object data, Long rows, String status) {
+        this.data = data;
+        this.rows = rows;
+        this.status = status;
+    }
+
+    public RestResult(Object data, Long rows) {
+        this.data = data;
+        this.rows = rows;
+    }
+
+    public RestResult(Object data, String status) {
+        this.data = data;
+        this.status = status;
+    }
+
+    public RestResult(String status) {
+        this.status = status;
+    }
 }
