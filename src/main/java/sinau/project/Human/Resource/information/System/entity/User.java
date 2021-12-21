@@ -21,6 +21,10 @@ public class User extends BaseEntity<User> {
 
     private static final long serialVersionUID = -2896266994252754612L;
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public enum Role {
         ROLE_USER,
         ROLE_ADMIN
