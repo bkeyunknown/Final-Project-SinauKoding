@@ -29,9 +29,9 @@ public class UserService extends BaseService<User> {
 
     @Transactional
     public User register(User param, User.Role role) {
-        User reference = dao.findOne(new User(param.getUsername()));
+        User reference = dao.findByUsername(param);
 
-        if (reference != null) {
+        if (reference.getUsername() != null) {
             return null;
         } else {
             param.setRole(role);
@@ -47,7 +47,7 @@ public class UserService extends BaseService<User> {
     public RestResult login(User param) {
         RestResult result = new RestResult(StatusCode.PASSWORD_OR_USER_NOT_REGISTERED);
 
-        User currentUser = dao.findOne(param);
+        User currentUser = dao.findByUsername(param);
 
         if (currentUser == null) {
             return result;
