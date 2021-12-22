@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import sinau.project.Human.Resource.information.System.entity.Attendance;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -12,6 +13,12 @@ import java.util.List;
 public class AttendanceDAO extends BaseDAO<Attendance> {
     @Override
     public List<Predicate> predicates(Attendance param, CriteriaBuilder builder, Root<Attendance> root, boolean isCount) {
-        return super.predicates(param, builder, root, isCount);
+        List<Predicate> predicates = super.predicates(param, builder, root, isCount);
+
+        if (!isCount) {
+            root.fetch("employee", JoinType.INNER).fetch("user", JoinType.INNER);
+        }
+
+        return predicates;
     }
 }
