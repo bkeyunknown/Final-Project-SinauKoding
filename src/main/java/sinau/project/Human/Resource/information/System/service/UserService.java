@@ -67,4 +67,8 @@ public class UserService extends BaseService<User> {
 
         return result;
     }
+
+    public User findByUsername(User param) {
+        return dao.findByUsername(param);
+    }
 }
