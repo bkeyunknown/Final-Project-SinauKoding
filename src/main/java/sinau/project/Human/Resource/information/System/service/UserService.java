@@ -27,6 +27,18 @@ public class UserService extends BaseService<User> {
         return dao;
     }
 
+    @Autowired
+    private BankService bankService;
+
+    @Autowired
+    private CompanyService companyService;
+
+    @Autowired
+    private PositionService positionService;
+
+    @Autowired
+    private DivisionService divisionService;
+
     @Transactional
     public User register(User param, User.Role role) {
         User reference = dao.findByUsername(param);
@@ -36,6 +48,11 @@ public class UserService extends BaseService<User> {
         } else {
             param.setRole(role);
             param.setPassword(BCrypt.hashpw(param.getPassword(), BCrypt.gensalt()));
+
+            param.setBank(bankService.findByName(param.getBank()));
+            param.setCompany(companyService.findByName(param.getCompany()));
+            param.setPosition(positionService.findByName(param.getPosition()));
+            param.setDivision(divisionService.findByName(param.getDivision()));
 
             dao.save(param);
 
