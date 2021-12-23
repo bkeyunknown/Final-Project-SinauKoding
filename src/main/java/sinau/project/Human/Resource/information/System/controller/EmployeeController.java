@@ -3,7 +3,6 @@ package sinau.project.Human.Resource.information.System.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sinau.project.Human.Resource.information.System.common.RestResult;
 import sinau.project.Human.Resource.information.System.common.StatusCode;
