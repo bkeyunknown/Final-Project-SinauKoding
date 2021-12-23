@@ -13,7 +13,6 @@ import sinau.project.Human.Resource.information.System.service.CompanyService;
 import java.util.ArrayList;
 
 @RestController
-@PreAuthorize("permitAll()")
 @RequestMapping("/company")
 public class CompanyController extends BaseController {
 

@@ -13,7 +13,6 @@ import sinau.project.Human.Resource.information.System.service.EmployeeService;
 import java.util.ArrayList;
 
 @RestController
-@PreAuthorize("permitAll()")
 @RequestMapping("/employees")
 public class EmployeeController extends BaseController {
 
@@ -52,7 +51,7 @@ public class EmployeeController extends BaseController {
             result.setData(service.update(employee));
             result.setStatus(StatusCode.UPDATE_SUCCESS);
         }
-        
+
         return result;
     }
 

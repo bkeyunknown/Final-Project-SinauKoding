@@ -14,7 +14,6 @@ import sinau.project.Human.Resource.information.System.utils.DateUtils;
 import java.util.ArrayList;
 
 @RestController
-@PreAuthorize("permitAll()")
 @RequestMapping("/attendances")
 public class AttendanceController extends BaseController {
 

@@ -13,7 +13,6 @@ import sinau.project.Human.Resource.information.System.service.PositionService;
 import java.util.ArrayList;
 
 @RestController
-@PreAuthorize("permitAll()")
 @RequestMapping("/positions")
 public class PositionController extends BaseController {
 

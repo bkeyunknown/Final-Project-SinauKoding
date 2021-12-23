@@ -13,7 +13,6 @@ import sinau.project.Human.Resource.information.System.service.BankService;
 import java.util.ArrayList;
 
 @RestController
-@PreAuthorize("permitAll()")
 @RequestMapping("/banks")
 public class BankController extends BaseController {
 

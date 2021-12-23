@@ -13,7 +13,6 @@ import sinau.project.Human.Resource.information.System.service.DivisionService;
 import java.util.ArrayList;
 
 @RestController
-@PreAuthorize("permitAll()")
 @RequestMapping("/divisions")
 public class DivisionController extends BaseController {
 
