@@ -17,4 +17,8 @@ public class BankService extends BaseService<Bank> {
         return dao;
     }
 
+    public Bank findByName(Bank param) {
+        return dao.findByName(param);
+    }
+
 }

@@ -17,4 +17,8 @@ public class PositionService extends BaseService<Position> {
         return dao;
     }
 
+    public Position findByName(Position param) {
+        return dao.findByName(param);
+    }
+
 }

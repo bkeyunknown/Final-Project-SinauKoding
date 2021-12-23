@@ -17,4 +17,8 @@ public class CompanyService extends BaseService<Company> {
         return dao;
     }
 
+    public Company findByName(Company param) {
+        return dao.findByName(param);
+    }
+
 }
