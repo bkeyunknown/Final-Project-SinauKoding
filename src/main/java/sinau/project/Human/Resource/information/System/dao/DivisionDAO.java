@@ -12,6 +12,14 @@ import java.util.List;
 public class DivisionDAO extends BaseDAO<Division> {
     @Override
     public List<Predicate> predicates(Division param, CriteriaBuilder builder, Root<Division> root, boolean isCount) {
-        return super.predicates(param, builder, root, isCount);
+        List<Predicate> predicates = super.predicates(param, builder, root, isCount);
+
+        if (param != null) {
+            if (param.getName() != null) {
+                predicates.add(builder.like(root.get("name"), "%" + param.getName() + "%"));
+            }
+        }
+
+        return predicates;
     }
 }

@@ -15,6 +15,16 @@ public class EmployeeDAO extends BaseDAO<Employee> {
     public List<Predicate> predicates(Employee param, CriteriaBuilder builder, Root<Employee> root, boolean isCount) {
         List<Predicate> predicates = super.predicates(param, builder, root, isCount);
 
+        if (param != null) {
+            if (param.getNip() != null) {
+                predicates.add(builder.like(root.get("nip"), "%" + param.getNip() + "%"));
+            }
+
+            if (param.getStatus() != null) {
+                predicates.add(builder.equal(root.get("status"), param.getStatus()));
+            }
+        }
+
         if (!isCount) {
             root.fetch("user", JoinType.INNER);
         }
