@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import sinau.project.Human.Resource.information.System.dao.BaseDAO;
 import sinau.project.Human.Resource.information.System.dao.EmployeeDAO;
 import sinau.project.Human.Resource.information.System.entity.Employee;
+import sinau.project.Human.Resource.information.System.entity.User;
 
 @Service
 public class EmployeeService extends BaseService<Employee> {
@@ -17,4 +18,7 @@ public class EmployeeService extends BaseService<Employee> {
         return dao;
     }
 
+    public Employee findByUserId(User param) {
+        return dao.findByUserId(param);
+    }
 }

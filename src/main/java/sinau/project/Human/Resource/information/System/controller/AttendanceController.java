@@ -54,14 +54,50 @@ public class AttendanceController extends BaseController {
 
     @PostMapping
     public RestResult save(@RequestBody Attendance param) {
-        param = service.save(param);
-        return new RestResult(param, param != null ? StatusCode.SAVE_SUCCESS : StatusCode.SAVE_FAILED);
+        RestResult result = new RestResult(StatusCode.OPERATION_FAILED);
+
+        if (param != null) {
+            result.setData(service.save(param));
+            result.setStatus(StatusCode.SAVE_SUCCESS);
+        }
+
+        return result;
     }
 
     @PutMapping
     public RestResult update(@RequestBody Attendance attendance) {
-        attendance = service.update(attendance);
-        return new RestResult(attendance, attendance != null ? StatusCode.UPDATE_SUCCESS : StatusCode.UPDATE_FAILED);
+        RestResult result = new RestResult(StatusCode.OPERATION_FAILED);
+
+        if (attendance != null) {
+            result.setData(service.update(attendance));
+            result.setStatus(StatusCode.UPDATE_SUCCESS);
+        }
+
+        return result;
+    }
+
+    @PutMapping("/start-rest")
+    public RestResult startRest(@RequestBody Attendance param) {
+        RestResult result = new RestResult(StatusCode.OPERATION_FAILED);
+
+        if (param != null) {
+            result.setData(service.startRest(param));
+            result.setStatus(StatusCode.UPDATE_SUCCESS);
+        }
+
+        return result;
+    }
+
+    @PutMapping("/end-rest")
+    public RestResult endRest(@RequestBody Attendance param) {
+        RestResult result = new RestResult(StatusCode.OPERATION_FAILED);
+
+        if (param != null) {
+            result.setData(service.endRest(param));
+            result.setStatus(StatusCode.UPDATE_SUCCESS);
+        }
+
+        return result;
     }
 
     @DeleteMapping(value = "{id}")
