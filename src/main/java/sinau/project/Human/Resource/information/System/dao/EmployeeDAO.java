@@ -25,7 +25,10 @@ public class EmployeeDAO extends BaseDAO<Employee> {
         }
 
         if (!isCount) {
-            root.fetch("user", JoinType.INNER);
+            root.fetch("user",JoinType.INNER).fetch("bank", JoinType.INNER);
+            root.fetch("user",JoinType.INNER).fetch("company", JoinType.INNER);
+            root.fetch("user",JoinType.INNER).fetch("position", JoinType.INNER);
+            root.fetch("user",JoinType.INNER).fetch("division", JoinType.INNER);
         }
 
         return predicates;
@@ -39,6 +42,11 @@ public class EmployeeDAO extends BaseDAO<Employee> {
 
         Predicate userPredicate = builder.equal(root.get("user").get("id"), param.getId());
         query.where(userPredicate);
+
+        root.fetch("user",JoinType.INNER).fetch("bank", JoinType.INNER);
+        root.fetch("user",JoinType.INNER).fetch("company", JoinType.INNER);
+        root.fetch("user",JoinType.INNER).fetch("position", JoinType.INNER);
+        root.fetch("user",JoinType.INNER).fetch("division", JoinType.INNER);
 
         TypedQuery<Employee> result = entityManager.createQuery(query);
         List<Employee> resultList = result.getResultList();
