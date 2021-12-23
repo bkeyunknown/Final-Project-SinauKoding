@@ -35,6 +35,13 @@ public class UserDAO extends BaseDAO<User> {
             }
         }
 
+        if (!isCount) {
+            root.fetch("bank", JoinType.INNER);
+            root.fetch("company", JoinType.INNER);
+            root.fetch("position", JoinType.INNER);
+            root.fetch("division", JoinType.INNER);
+        }
+
         return predicates;
     }
 
@@ -46,6 +53,11 @@ public class UserDAO extends BaseDAO<User> {
 
         Predicate usernamePredicate = builder.equal(root.get("username"), param.getUsername());
         query.where(usernamePredicate);
+
+        root.fetch("bank", JoinType.INNER);
+        root.fetch("company", JoinType.INNER);
+        root.fetch("position", JoinType.INNER);
+        root.fetch("division", JoinType.INNER);
 
         TypedQuery<User> result = entityManager.createQuery(query);
         List<User> resultList = result.getResultList();
