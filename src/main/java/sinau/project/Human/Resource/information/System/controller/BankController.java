@@ -38,8 +38,14 @@ public class BankController extends BaseController {
 
     @PutMapping
     public RestResult update(@RequestBody Bank bank) {
-        bank = service.update(bank);
-        return new RestResult(bank, bank != null ? StatusCode.UPDATE_SUCCESS : StatusCode.UPDATE_FAILED);
+        RestResult result = new RestResult(StatusCode.OPERATION_FAILED);
+
+        if (bank != null) {
+            result.setData(service.update(bank));
+            result.setStatus(StatusCode.UPDATE_SUCCESS);
+        }
+
+        return result;
     }
 
     @DeleteMapping(value = "{id}")

@@ -38,8 +38,14 @@ public class PositionController extends BaseController {
 
     @PutMapping
     public RestResult update(@RequestBody Position position) {
-        position = service.update(position);
-        return new RestResult(position, position != null ? StatusCode.UPDATE_SUCCESS : StatusCode.UPDATE_FAILED);
+        RestResult result = new RestResult(StatusCode.OPERATION_FAILED);
+
+        if (position != null) {
+            result.setData(service.update(position));
+            result.setStatus(StatusCode.UPDATE_SUCCESS);
+        }
+
+        return result;
     }
 
     @DeleteMapping(value = "{id}")

@@ -38,8 +38,14 @@ public class DivisionController extends BaseController {
 
     @PutMapping
     public RestResult update(@RequestBody Division division) {
-        division = service.update(division);
-        return new RestResult(division, division != null ? StatusCode.UPDATE_SUCCESS : StatusCode.UPDATE_FAILED);
+        RestResult result = new RestResult(StatusCode.OPERATION_FAILED);
+
+        if (division != null) {
+            result.setData(service.update(division));
+            result.setStatus(StatusCode.UPDATE_SUCCESS);
+        }
+
+        return result;
     }
 
     @DeleteMapping(value = "{id}")

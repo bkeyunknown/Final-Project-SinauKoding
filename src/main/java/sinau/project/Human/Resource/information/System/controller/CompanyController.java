@@ -38,8 +38,14 @@ public class CompanyController extends BaseController {
 
     @PutMapping
     public RestResult update(@RequestBody Company company) {
-        company = service.update(company);
-        return new RestResult(company, company != null ? StatusCode.UPDATE_SUCCESS : StatusCode.UPDATE_FAILED);
+        RestResult result = new RestResult(StatusCode.OPERATION_FAILED);
+
+        if (company != null) {
+            result.setData(service.update(company));
+            result.setStatus(StatusCode.UPDATE_SUCCESS);
+        }
+
+        return result;
     }
 
     @DeleteMapping(value = "{id}")
