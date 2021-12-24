@@ -46,5 +46,23 @@ public abstract class BaseService<T extends BaseEntity<T>> {
         return getDAO().delete(getDAO().findReference(id)) != null;
     }
 
+    @Transactional
+    public T findById(Long id) {
+        return getDAO().findReference(id);
+    }
+
+    @Transactional
+    public void updateDeleteStatus(Long id) {
+        T reference = getDAO().findReference(id);
+        if (reference != null) {
+            reference.setDeletedTime(reference.getDeletedTime() != null
+                    ? reference.getDeletedTime()
+                    : new Date());
+
+            reference.setDeletedBy(reference.getDeletedBy() != null
+                    ? reference.getDeletedBy()
+                    : HumanResourceInformationSystemApplication.getCurrentUser().getId());
+        }
+    }
 
 }
