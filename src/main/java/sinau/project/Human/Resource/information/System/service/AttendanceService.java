@@ -51,8 +51,7 @@ public class AttendanceService extends BaseService<Attendance> {
                     ? entity.getNote()
                     : reference.getNote());
 
-            entity.setEndTime(reference.getEndTime());
-            entity.setNote(reference.getNote());
+            entity = reference;
 
             return entity;
         }
@@ -69,7 +68,7 @@ public class AttendanceService extends BaseService<Attendance> {
                     ? entity.getRestStartTime()
                     : new Date());
 
-            entity.setRestStartTime(reference.getRestStartTime());
+            entity = reference;
 
             return entity;
         }
@@ -86,7 +85,7 @@ public class AttendanceService extends BaseService<Attendance> {
                     ? entity.getRestEndTime()
                     : new Date());
 
-            entity.setRestEndTime(reference.getRestEndTime());
+            entity = reference;
 
             return entity;
         }

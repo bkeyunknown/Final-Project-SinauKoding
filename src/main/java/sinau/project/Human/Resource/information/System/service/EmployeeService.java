@@ -41,8 +41,7 @@ public class EmployeeService extends BaseService<Employee> {
                     ? Employee.StatusEmployee.DEACTIVATE
                     : reference.getStatus());
 
-            entity.setEndDate(reference.getEndDate());
-            entity.setStatus(reference.getStatus());
+            entity = reference;
 
             return entity;
         }
