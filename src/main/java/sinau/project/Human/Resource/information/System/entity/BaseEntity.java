@@ -66,13 +66,4 @@ public abstract class BaseEntity<T> implements Serializable {
                 : 0);
     }
 
-    @PreRemove
-    protected void onRemove() {
-        setDeleted(Boolean.TRUE);
-        setDeletedTime(new Date());
-        setDeletedBy(HumanResourceInformationSystemApplication.getCurrentUser() != null
-                ? HumanResourceInformationSystemApplication.getCurrentUser().getId()
-                : 0);
-    }
-
 }

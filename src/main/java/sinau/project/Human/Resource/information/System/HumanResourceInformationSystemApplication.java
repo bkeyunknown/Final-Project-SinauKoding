@@ -14,10 +14,10 @@ public class HumanResourceInformationSystemApplication {
 
 	public static User getCurrentUser() {
 		try {
-			Object pricipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-			if (pricipal != null && pricipal.getClass().equals(User.class)) {
-				return (User) pricipal;
+			if (principal != null && principal.getClass().equals(User.class)) {
+				return (User) principal;
 			}
 		} catch (Exception ignore) {}
 
