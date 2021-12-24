@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
+import sinau.project.Human.Resource.information.System.HumanResourceInformationSystemApplication;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -40,20 +41,38 @@ public abstract class BaseEntity<T> implements Serializable {
     @Temporal(TIMESTAMP)
     private Date updatedTime;
 
+    @Column(name = "created_by")
+    private Long createdBy;
+
+    @Column(name = "deleted_by")
+    private Long deletedBy;
+
+    @Column(name = "updated_by")
+    private Long updatedBy;
+
     @PrePersist
     protected void onCreate() {
         setCreateTime(new Date());
+        setCreatedBy(HumanResourceInformationSystemApplication.getCurrentUser() != null
+                ? HumanResourceInformationSystemApplication.getCurrentUser().getId()
+                : 0);
     }
 
     @PreUpdate
     protected void onUpdate() {
         setUpdatedTime(new Date());
+        setUpdatedBy(HumanResourceInformationSystemApplication.getCurrentUser() != null
+                ? HumanResourceInformationSystemApplication.getCurrentUser().getId()
+                : 0);
     }
 
     @PreRemove
     protected void onRemove() {
         setDeleted(Boolean.TRUE);
         setDeletedTime(new Date());
+        setDeletedBy(HumanResourceInformationSystemApplication.getCurrentUser() != null
+                ? HumanResourceInformationSystemApplication.getCurrentUser().getId()
+                : 0);
     }
 
 }
