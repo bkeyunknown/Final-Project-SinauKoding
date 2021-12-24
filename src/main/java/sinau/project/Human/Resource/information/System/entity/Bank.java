@@ -3,6 +3,8 @@ package sinau.project.Human.Resource.information.System.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,6 +13,8 @@ import javax.persistence.*;
 @Setter
 @Getter
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE bank SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Bank extends BaseEntity<Bank>{
 
     private static final long serialVersionUID = 6460783416031543243L;
