@@ -85,6 +85,32 @@ public class UserService extends BaseService<User> {
         return result;
     }
 
+    @Transactional
+    public User update(User entity) {
+        if (entity.getId() != null) {
+            User reference = getDAO().findReference(entity.getId());
+
+            reference.setNoRekening(entity.getNoRekening() != null ? entity.getNoRekening() : reference.getNoRekening());
+            reference.setDateOfBirth(entity.getDateOfBirth() != null ? entity.getDateOfBirth() : reference.getDateOfBirth());
+            reference.setDomicileAddress(entity.getDomicileAddress() != null ? entity.getDomicileAddress() : reference.getDomicileAddress());
+            reference.setPendidikanTerakhir(entity.getPendidikanTerakhir() != null ? entity.getPendidikanTerakhir() : reference.getPendidikanTerakhir());
+            reference.setMaritalStatus(entity.getMaritalStatus() != null ? entity.getMaritalStatus() : reference.getMaritalStatus());
+            reference.setNickName(entity.getNickName() != null ? entity.getNickName() : reference.getNickName());
+            reference.setNoBpjsKetenagakerjaan(entity.getNoBpjsKetenagakerjaan() != null ? entity.getNoBpjsKetenagakerjaan() : reference.getNoBpjsKetenagakerjaan());
+            reference.setNoBpjsKesehatan(entity.getNoBpjsKesehatan() != null ? entity.getNoBpjsKesehatan() : reference.getNoBpjsKesehatan());
+            reference.setNoKtp(entity.getNoKtp() != null ? entity.getNoKtp() : reference.getNoKtp());
+            reference.setNpwp(entity.getNpwp() != null ? entity.getNpwp() : reference.getNpwp());
+            reference.setPhone(entity.getPhone() != null ? entity.getPhone() : reference.getPhone());
+            reference.setPlaceOfBirth(entity.getPlaceOfBirth() != null ? entity.getPlaceOfBirth() : reference.getPlaceOfBirth());
+            reference.setProfileName(entity.getProfileName() != null ? entity.getProfileName() : reference.getProfileName());
+            reference.setReligion(entity.getReligion() != null ? entity.getReligion() : reference.getReligion());
+            reference.setResidenceAddress(entity.getResidenceAddress() != null ? entity.getResidenceAddress() : reference.getResidenceAddress());
+
+            return entity;
+        }
+        return null;
+    }
+
     public User findByUsername(User param) {
         return dao.findByUsername(param);
     }
