@@ -60,6 +60,7 @@ public class EmployeeController extends BaseController {
         Employee entity = service.findById(id);
 
         if (entity != null) {
+            service.deactivateStatus(entity);
             service.updateDeleteStatus(id);
             deleted = service.delete(id);
         }
