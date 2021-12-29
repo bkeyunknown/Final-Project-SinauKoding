@@ -1,6 +1,7 @@
 package sinau.project.Human.Resource.information.System.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import sinau.project.Human.Resource.information.System.dao.UserDAO;
 import sinau.project.Human.Resource.information.System.entity.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Service
 public class UserService extends BaseService<User> {
@@ -71,8 +73,10 @@ public class UserService extends BaseService<User> {
         } else if (currentUser.getPassword() != null &&
                 BCrypt.checkpw(param.getPassword(), currentUser.getPassword())) {
 
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(currentUser.getRole().name()));
             UserDetails userDetails = new org.springframework.security.core.userdetails.
-                    User(currentUser.getUsername(), currentUser.getPassword(), new ArrayList<>());
+                    User(currentUser.getUsername(), currentUser.getPassword(), authorities);
 
             currentUser.setToken(jwtTokenService.generateToken(userDetails));
 
