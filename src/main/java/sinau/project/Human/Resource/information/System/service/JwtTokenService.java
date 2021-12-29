@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import sinau.project.Human.Resource.information.System.entity.User;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class JwtTokenService {
@@ -24,8 +26,10 @@ public class JwtTokenService {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
-    private String doGenerateToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder().setClaims(claims).setSubject(subject)
+    private String doGenerateToken(Map<String, Object> claims, UserDetails userDetails) {
+        return Jwts.builder().setClaims(claims)
+                .claim("role", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
@@ -33,7 +37,7 @@ public class JwtTokenService {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername());
+        return doGenerateToken(claims, userDetails);
     }
 
     public <T> T getClaimsFromToken(String token, Function<Claims, T> claimsTFunction) {

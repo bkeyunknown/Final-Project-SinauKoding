@@ -28,5 +28,10 @@ public class AuthenticationController extends BaseController {
         return new RestResult(service.register(param, User.Role.ROLE_USER));
     }
 
+    @PostMapping(value = "register/this/admin")
+    public RestResult registerAdmin(@RequestBody User param) {
+        return new RestResult(service.register(param, User.Role.ROLE_ADMIN));
+    }
+
 
 }

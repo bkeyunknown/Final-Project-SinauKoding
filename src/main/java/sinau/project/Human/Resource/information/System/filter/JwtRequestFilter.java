@@ -3,6 +3,7 @@ package sinau.project.Human.Resource.information.System.filter;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -54,8 +56,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             user = userService.findByUsername(user);
 
             if (jwtTokenService.validationToken(jwtToken, user)) {
+                Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
                 UsernamePasswordAuthenticationToken authenticationToken
-                        = new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+                        = new UsernamePasswordAuthenticationToken(user, null, authorities);
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
