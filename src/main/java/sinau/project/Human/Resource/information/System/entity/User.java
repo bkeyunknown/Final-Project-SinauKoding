@@ -15,7 +15,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.TemporalType.*;
 
 @Entity
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 @Setter
 @Getter
 @NoArgsConstructor
